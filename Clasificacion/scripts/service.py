@@ -30,6 +30,8 @@ def default():
 	test_image = image.load_img(test_image_path,target_size = (50, 50))
 	test_image = image.img_to_array(test_image)
 	test_image = np.expand_dims(test_image, axis = 0)
+	
+	with graph.as_default():
 	result = loaded_model.predict(test_image)
 		if result[0][0] == 1:
     			print(result[0][0], ' --> Es un perro')
