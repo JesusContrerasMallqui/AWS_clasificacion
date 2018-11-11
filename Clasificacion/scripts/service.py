@@ -33,9 +33,9 @@ def default():
 	with graph.as_default():
 		score = loaded_model.predict(x)
 		if result[0][0] == 1:
-    print(result[0][0], ' --> Es un perro')
+    			print(result[0][0], ' --> Es un perro')
 		else:
-		    print(result[0][0], ' --> Es un gato ')
+		    	print(result[0][0], ' --> Es un gato ')
 
 # Run de application
 app.run(host='0.0.0.0',port=5000)
