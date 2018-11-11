@@ -31,12 +31,12 @@ def default():
 	x = np.expand_dims(img, axis=0) * 1./255
 
 	with graph.as_default():
-		score = loaded_model.predict(x)
+		result = loaded_model.predict(test_image)
 		if result[0][0] == 1:
     			print(result[0][0], ' --> Es un perro')
 		else:
 		    	print(result[0][0], ' --> Es un gato ')
-		return resultado
+		return result
 
 # Run de application
 app.run(host='0.0.0.0',port=5000)
