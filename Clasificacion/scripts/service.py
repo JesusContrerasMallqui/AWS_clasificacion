@@ -14,15 +14,15 @@ loaded_model, graph = cargarModelo()
 def main_page():
 	return 'Bienvenido a la URP - RNA!'
 
-@app.route('/rayos-x/', methods=['GET','POST'])
+@app.route('/Clasificacion/', methods=['GET','POST'])
 def rayosx():
-	return 'Modelo Rayos-X!'
+	return 'Modelo Clasificacion!'
 
-@app.route('/rayos-x/default/', methods=['GET','POST'])
+@app.route('/Clasificacion/default/', methods=['GET','POST'])
 def default():
 	print (request.args)
 	# dimensions of our images.
-	img_width, img_height = 299, 299
+	img_width, img_height = 50, 50
 	# Show
 	image_name = request.args.get("imagen")
 	img_path='../samples/'+image_name
@@ -32,12 +32,10 @@ def default():
 
 	with graph.as_default():
 		score = loaded_model.predict(x)
-		if score < 0.5:
-			resultado = 'Prediccion: Abdomen X-ray , score: ' + str(score[0][0])
+		if result[0][0] == 1:
+    print(result[0][0], ' --> Es un perro')
 		else:
-		    resultado = 'Prediccion: Pulmon X-ray , score: ' + str(score[0][0])
-		print('Prediccion:', score, 'Abdomen X-ray' if score < 0.5 else 'Pulmon X-ray')
-		return resultado
+		    print(result[0][0], ' --> Es un gato ')
 
 # Run de application
 app.run(host='0.0.0.0',port=5000)
