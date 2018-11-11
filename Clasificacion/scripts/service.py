@@ -36,6 +36,7 @@ def default():
     			print(result[0][0], ' --> Es un perro')
 		else:
 		    	print(result[0][0], ' --> Es un gato ')
+		return resultado
 
 # Run de application
 app.run(host='0.0.0.0',port=5000)
