@@ -21,22 +21,23 @@ def rayosx():
 @app.route('/Clasificacion/default/', methods=['GET','POST'])
 def default():
 	print (request.args)
+	# dimensions of our images.
+	img_width, img_height = 50, 50
 	# Show
 	image_name = request.args.get("imagen")
-	test_image_path = '../samples/'+image_name
-	test_image = image.load_img(test_image_path)
-	plt.imshow(test_image)
-	plt.show()
-	test_image = image.load_img(test_image_path,target_size = (50, 50))
-	test_image = image.img_to_array(test_image)
-	test_image = np.expand_dims(test_image, axis = 0)
-	
+	img_path='../samples/'+image_name
+	img = image.load_img(img_path, target_size=(img_width, img_height))
+	img = image.img_to_array(img)
+	x = np.expand_dims(img, axis=0) * 1./255
+
 	with graph.as_default():
-	result = loaded_model.predict(test_image)
-		if result[0][0] == 1:
-    			print(result[0][0], ' --> Es un perro')
+		score = loaded_model.predict(x)
+		if score < 0.5:
+			resultado = 'Prediccion: Gato , score: ' + str(score[0][0])
 		else:
-    			print(result[0][0], ' --> Es un gato ')
+		    resultado = 'Prediccion: Perro , score: ' + str(score[0][0])
+		print('Prediccion:', score, ' Gato ' if score < 0.5 else ' Perro')
+		return resultado
 
 # Run de application
 app.run(host='0.0.0.0',port=5000)
