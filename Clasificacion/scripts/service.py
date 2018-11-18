@@ -12,7 +12,7 @@ loaded_model, graph = cargarModelo()
 #Define a route
 @app.route('/')
 def main_page():
-	return 'Bienvenido a la URP - RNA!'
+	return 'Bienvenido Prediccion de Perros y Gatos usando CNN!'
 
 @app.route('/Clasificacion/', methods=['GET','POST'])
 def rayosx():
